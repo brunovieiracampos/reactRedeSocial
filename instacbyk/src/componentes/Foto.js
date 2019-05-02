@@ -47,6 +47,7 @@ class FotoInfo extends Component{
             }
               
             
+            
             </ul>
           </div>
         );
