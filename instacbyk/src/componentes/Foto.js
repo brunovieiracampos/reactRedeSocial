@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 
 class FotoHeader extends Component{
     render(){
@@ -7,9 +8,9 @@ class FotoHeader extends Component{
                 <figure className="foto-usuario">
                   <img src={this.props.foto.urlPerfil} alt="foto do usuario" />
                   <figcaption className="foto-usuario">
-                    <a href="#/teste">
+                    <Link to={`/timeline/${this.props.foto.loginUsuario}`}>
                       {this.props.foto.loginUsuario}
-                    </a>  
+                    </Link>  
                   </figcaption>
                 </figure>
                 <time className="foto-data">{this.props.foto.horario}</time>
@@ -25,22 +26,22 @@ class FotoInfo extends Component{
             <div className="foto-info-likes">
             {
                 this.props.foto.likers.map(liker => {
-                  return  <a href="#/teste">{liker.login},</a> 
+                  return  <Link key={liker.login} to={`/timeline/${liker.login}`}>{liker.login},</Link> 
                 })
             }
            
             </div>
 
             <p className="foto-info-legenda">
-              <a className="foto-info-autor">autor </a>
+              <Link className="foto-info-autor">autor </Link>
              {this.props.foto.comentario}
             </p>
 
             <ul className="foto-info-comentarios">
             {
                 this.props.foto.comentarios.map(comentario => {
-                  return  (<li className="comentario">
-                            <a className="foto-info-autor">{comentario.login}</a>
+                  return  (<li className="comentario" key={comentario.id}>
+                            <Link className="foto-info-autor" to={`/timeline/${comentario.login}`}>{comentario.login}</Link>
                               {comentario.texto}
                           </li>)
                 })

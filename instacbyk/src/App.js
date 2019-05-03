@@ -8,7 +8,7 @@ export default class App extends Component {
       <div id="root">
       <div className="main">
         <Header />
-        <TimeLine />
+        <TimeLine login={this.props.login}/>
         </div>
       </div>
   );

@@ -26,7 +26,8 @@ export default class Login extends Component {
                         throw new Error('Não foi possível fazer o login.');
                 }
             }).then(token => {
-                console.log(token);
+                localStorage.setItem('auth-token', token);
+                this.props.history.push('timeline');
             }).catch(error => {
                 this.setState({mensagem: error.message})
             });

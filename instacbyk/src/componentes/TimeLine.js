@@ -9,7 +9,21 @@ export default class TimeLine extends Component {
     }
 
     componentDidMount() {
-        fetch('https://instalura-api.herokuapp.com/api/public/fotos/rafael')
+        this.carregaFotos(this.props);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.carregaFotos(nextProps);
+    }
+
+    carregaFotos(props) {
+        let urlPerfil = 'https://instalura-api.herokuapp.com/api/public/fotos/rafael';
+
+        if (props.login !== undefined) {
+            urlPerfil = `https://instalura-api.herokuapp.com/api/public/fotos/${props.login}`;
+        }
+
+        fetch(urlPerfil)
             .then(response => response.json())
             .then(fotos => {
                 this.setState({ fotos: fotos })
@@ -21,7 +35,7 @@ export default class TimeLine extends Component {
 
             <div className="fotos container">
                 {
-                    this.state.fotos.map(foto => <Foto foto={foto} />)
+                    this.state.fotos.map(foto => <Foto key={foto.id} foto={foto} />)
                 }
             </div>
         )
